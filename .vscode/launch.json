@@ -1,0 +1,37 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Client<flota>",
+            "request": "launch",
+            "mainClass": "org.flota.project.Client",
+            "projectName": "flota"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-NewMap<flota>",
+            "request": "launch",
+            "mainClass": "org.flota.project.NewMap",
+            "projectName": "flota",
+            "vmArgs": "--module-path=C:\\Java\\javafx-sdk-11.0.2\\lib --add-modules=javafx.controls"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Server<flota>",
+            "request": "launch",
+            "mainClass": "org.flota.project.Server",
+            "projectName": "flota"
+        }
+    ]
+}
