@@ -1,9 +1,14 @@
 package org.flota.project;
 
+import org.flota.project.Log.ConsoleLogger;
+import org.flota.project.Log.FileLogger;
+import org.flota.project.Log.IRegistroLog;
+import org.flota.project.config.Settings;
 
 public class RegistroLog {
 
     public static RegistroLog registro;
+    private IRegistroLog logger;
 
     public static synchronized RegistroLog getInstance()  {
 
@@ -13,8 +18,16 @@ public class RegistroLog {
         return registro;
     }
 
-    public void log (String mensaje)    {
+    private RegistroLog() {
+        if (Settings.FILE_LOG_NAME_ACTIVE){
+            this.logger = new FileLogger();
+        } else {
+            this.logger = new ConsoleLogger();
+        }
 
-        System.out.println( mensaje );
+    }
+
+    public void log (String mensaje)    {
+        logger.log(mensaje);
     }
 }

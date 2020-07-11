@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.geometry.Pos;
 
 public class Ventana extends Application {
 
@@ -21,7 +22,8 @@ public class Ventana extends Application {
         stage.setHeight(700);
         stage.show();
 
-        // create a JavaFX scene with a stack pane as the root node and add it to the scene
+        // create a JavaFX scene with a stack pane as the root node and add it to the
+        // scene
         StackPane stackPane = new StackPane();
         Scene scene = new Scene(stackPane);
         stage.setScene(scene);
@@ -36,11 +38,13 @@ public class Ventana extends Application {
         btnNuevo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                muestraNuevaVentana();
+                //muestraNuevaVentana();
+                clonarVentana();
             }
         });
 
-        // stackPane.getChildren().add(btnNuevo);
+        stackPane.getChildren().add(btnNuevo);
+        StackPane.setAlignment(btnNuevo, Pos.TOP_LEFT);
     }
 
     public void muestraNuevaVentana() {
@@ -49,14 +53,31 @@ public class Ventana extends Application {
         Scene scene = new Scene(stackPane);
         stage.setScene(scene);
 
-        //  Clonacion de MapaBase
-        Mapa mapaBase2 = (Mapa)mapaBase.copiar();
+        // Clonacion de MapaBase
+        Mapa mapaBase2 = (Mapa) mapaBase.copiar();
 
         mapaBase2.imprimeCoordenadasActual();
         stackPane.getChildren().add(mapaBase2.getMapView());
 
         stage.show();
-    }    
+    }
+
+    public void clonarVentana() {
+        Stage stage = new Stage();
+        StackPane stackPane = new StackPane();
+        Scene scene = new Scene(stackPane);
+        stage.setScene(scene);
+        stage.setWidth(800);
+        stage.setHeight(700);
+
+        // Clonacion de MapaBase
+        Mapa mapaBase2;
+        mapaBase2 = (Mapa) mapaBase.clone();
+        mapaBase2.imprimeCoordenadasActual();
+        stackPane.getChildren().add(mapaBase2.getMapView());
+        stage.show();
+
+    } 
     
 
 }

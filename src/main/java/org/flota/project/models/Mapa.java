@@ -31,6 +31,9 @@ public class Mapa implements IMapa {
     private double coordenadaXActual;
     private double coordenadaYActual;
 
+    private double initialZoom;
+    private double actualZoom;
+
     private RegistroLog registro = RegistroLog.getInstance();
 
     public Mapa() {
@@ -48,7 +51,8 @@ public class Mapa implements IMapa {
         // Viewpoint viewpoint = new Viewpoint(27.3805833, 33.6321389, 6E3);
         this.coordenadaXInicial = -12.0560;
         this.coordenadaYInicial = -77.0844;
-        Viewpoint viewpoint = new Viewpoint(this.coordenadaXInicial, this.coordenadaYInicial, 12000); // UNMSM
+        this.initialZoom = 12000;
+        Viewpoint viewpoint = new Viewpoint(this.coordenadaXInicial, this.coordenadaYInicial, this.initialZoom); // UNMSM
 
         // take 5 seconds to move to viewpoint
         final ListenableFuture<Boolean> viewpointSetFuture = mapView.setViewpointAsync(viewpoint, 5);
@@ -104,7 +108,8 @@ public class Mapa implements IMapa {
 
         this.coordenadaXActual = location.getX();
         this.coordenadaYActual = location.getY();
-        registro.log("Coordenadas: " + this.coordenadaXActual + ", " + this.coordenadaYActual);
+        this.actualZoom = this.mapView.getMapScale();
+        registro.log("Coordenadas: " + this.coordenadaXActual + ", " + this.coordenadaYActual+ ", "+ this.actualZoom);
 
         String latLonDecimalDegrees = CoordinateFormatter.toLatitudeLongitude(location,
                 CoordinateFormatter.LatitudeLongitudeFormat.DECIMAL_DEGREES, 4);
@@ -142,7 +147,19 @@ public class Mapa implements IMapa {
         m.coordenadaYInicial = this.coordenadaYInicial;
         m.coordenadaXActual = this.coordenadaXActual;
         m.coordenadaYActual = this.coordenadaYActual;
+        m.initialZoom = this.actualZoom;
         return m;
+    }
+
+    @Override
+    public Object clone() {
+        try {
+            return (Mapa) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.out.println("no se pudo clonar el objeto");
+            return copiar();
+        }
+        
     }
 
 }

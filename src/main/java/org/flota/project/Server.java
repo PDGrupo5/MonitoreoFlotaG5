@@ -12,7 +12,8 @@ public class Server {
 
         RegistroLog.getInstance().log("Iniciando servidor");
 
-        ArcGISRuntimeEnvironment.setInstallDirectory("/home/jerson/arcgis-runtime-sdk-java-100.8.0");
+        //ArcGISRuntimeEnvironment.setInstallDirectory("/home/jerson/arcgis-runtime-sdk-java-100.8.0");
+        ArcGISRuntimeEnvironment.setInstallDirectory("D:\\irvin\\Programs\\arcgis-runtime-sdk-java-100.8.0");
 
         Application.launch(Ventana.class, args);
     }
